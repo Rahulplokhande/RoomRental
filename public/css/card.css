@@ -1,0 +1,84 @@
+ body {
+    overflow-x: hidden;
+    top:0;
+    right: 0;
+    left: 0;
+}
+.card-con{
+    padding: 0 100px !important;
+    margin: 50px 0 100px 0 !important;
+}
+.card {
+    border: none !important;
+    background-color: #ffffff !important;
+    scale: 0.95;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+    display: flex !important;
+    flex-direction: column; /* ensures vertical stacking */
+    justify-content: start !important;
+    align-items: start !important;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15); /* subtle shadow */
+    border-radius: 15px !important; /* rounded corners */
+    margin-bottom: 30px; /* spacing between rows */
+}
+
+
+.card:hover{
+    opacity: 0.7;
+}
+.card-linK{
+    text-decoration: none !important;
+}
+.imgs{
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    display: flex !important;
+    align-items: center !important;
+}
+.card-img-top{
+    border-radius: 1rem !important;
+    height: 300px;
+    object-fit: cover;
+}
+.card-img-overlay{
+    opacity: .3;
+}
+.card-list{
+    text-decoration: none !important;
+}
+.card-body {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
+    padding: 1px; /* remove margin-left and add padding */
+}
+
+
+a{
+position: relative;
+}
+.upload{
+    display: flex;
+}
+
+.property-title{
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: -10px;
+}
+
+/* new Form */
+.newForm{
+    display: flex;
+    margin: 50px 0 100px 100px !important;
+    justify-content: center;
+}
+.newForm h3{
+    margin-bottom: 2rem;
+}
+

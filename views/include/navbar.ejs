@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Gupter:wght@400;500;700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <span class="name">Kirayaa..</span>
+        </div>
+        <ul class="nav-linkss">
+            <li><a href="/home" class="<%= currentRoute === '/home' ? 'active' : '' %>">Home</a></li>
+            <li><a href="/about" class="<%= currentRoute === '/about' ? 'active' : '' %>">About Us</a></li>
+            <li><a href="/home/listing" class="<%= currentRoute === '/home/listing' ? 'active' : '' %>">Properties</a></li>
+            <li><a href="/home/listing/new" class="<%= currentRoute === '/home/listing/new' ? 'active' : '' %>">Add Property</a></li>
+            <li><a href="/contact" class="<%= currentRoute === '/contact' ? 'active' : '' %>">Contact</a></li>
+        </ul>
+        <div class="auth-links">
+          <% if (locals.user) { %>
+
+            <div class="user-dropdown user-icon" onclick="toggleProfileSidebar()">
+                <i class="fa-solid fa-user"></i>
+            </div>
+        <% } else { %>
+            <div class="signIcon">
+              <i class="fa-solid fa-user icon1"></i>
+              <a href="/login">Sign In / Register</a>
+            </div>
+        <% } %>        
+        </div>
+    </nav>
+    <div id="profileSidebar" class="profile-sidebar">
+        <div class="sidebar-header">
+            <h3>Profile</h3>
+            <i class="fas fa-times close-btn" onclick="closeProfileSidebar()"></i>
+        </div>
+        <div class="profile-content">
+            <div class="profile-info">
+                <h4><%= locals.user ? user.firstname : '' %></h4>
+                <p><%= locals.user ? user.email : '' %></p>
+            </div>
+            <ul class="profile-menu">
+                <li><a href="/mybookings"><i class="fas fa-list"></i> My Bookings</a></li>
+                <li><a href="/changepassword"><i class="fas fa-lock"></i> Change Password</a></li>
+                <li><a href="/logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+
+            </ul>
+        </div>
+    </div>
+<script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById("userDropdown");
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+    }
+
+    window.addEventListener("click", function(e) {
+        if (!e.target.closest('.user-dropdown')) {
+            const dropdown = document.getElementById("userDropdown");
+            if (dropdown) dropdown.style.display = "none";
+        }
+    });
+
+    function toggleProfileSidebar() {
+        const sidebar = document.getElementById("profileSidebar");
+        sidebar.classList.toggle("active");
+    }
+
+    function closeProfileSidebar() {
+        const sidebar = document.getElementById("profileSidebar");
+        sidebar.classList.remove("active");
+    }
+
+    window.addEventListener("click", function(e) {
+        const sidebar = document.getElementById("profileSidebar");
+        if (!e.target.closest('.profile-sidebar') && !e.target.closest('.user-dropdown')) {
+            sidebar.classList.remove("active");
+        }
+    });
+</script>
+</body>
+</html>

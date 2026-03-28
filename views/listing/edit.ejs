@@ -1,0 +1,88 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Listing</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+ 
+</head>
+</head>
+<body>
+    <%- include("../include/navbar.ejs") %>
+  <div class="row mt-4 edit-listing">
+    <div class="col-6 offset-3">
+      <h4>Edit Your Listing</h4>
+
+      <form method="POST" action="/home/listing/<%= property._id %>?_method=PUT" enctype="multipart/form-data" novalidate class="needs-validation">
+
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input name="property[title]" class="form-control" value="<%= property.title %>" type="text" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input name="property[location]" class="form-control" value="<%= property.location %>" type="text" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="rent" class="form-label">Rent</label>
+          <input name="property[rent]" class="form-control" value="<%= property.rent %>" type="number" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="apartmentType" class="form-label">Apartment Type</label>
+          <select name="property[apartmentType]" class="form-select" required>
+            <% const types = ['1 RK', '1 BHK', '2 BHK', '3 BHK', '4 BHK', 'Studio', 'Penthouse']; %>
+            <% types.forEach(type => { %>
+              <option value="<%= type %>" <%= property.apartmentType === type ? 'selected' : '' %>><%= type %></option>
+            <% }); %>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="image" class="form-label">Update Image</label>
+          <input name="image" class="form-control" type="file" accept="image/*" />
+        </div>
+
+        <hr>
+        <h5>Owner Details</h5>
+
+        <div class="mb-3">
+          <label for="ownerName" class="form-label">Owner Name</label>
+          <input name="property[ownerDetails][ownerName]" class="form-control" value="<%=property.ownerDetails.ownerName %>" type="text" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="ownerContact" class="form-label">Owner Contact</label>
+          <input name="property[ownerDetails][ownerContact]" class="form-control" value="<%= property.ownerDetails.ownerContact %>" type="text" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="ownerEmail" class="form-label">Owner Email</label>
+          <input name="property[ownerDetails][ownerEmail]" class="form-control" value="<%= property.ownerDetails.ownerEmail %>" type="email" required />
+        </div>
+
+        <div class="mb-3">
+          <label for="ownerAddress" class="form-label">Owner Address</label>
+          <input name="property[ownerDetails][ownerAddress]" class="form-control" value="<%= property.ownerDetails.ownerAddress %>" type="text" required />
+        </div>
+
+        <% if (property.isSold !== undefined) { %>
+        <div class="form-check mb-3">
+          <input class="form-check-input" type="checkbox" name="property[isSold]" value="true" <%= property.isSold ? 'checked' : '' %>>
+          <label class="form-check-label">
+            Mark as Sold
+          </label>
+        </div>
+        <% } %>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
